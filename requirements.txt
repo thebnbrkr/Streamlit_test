@@ -2,3 +2,6 @@ streamlit
 streamlit-chat
 requests
 datetime
+langchain
+-U sentence-transformers
+qdrant-client
