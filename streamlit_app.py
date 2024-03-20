@@ -90,7 +90,7 @@ qa_chain = RetrievalQA.from_chain_type(llm=llm,
                                   retriever=qdrant.as_retriever(search_kwargs={"k": 2}),
                                   return_source_documents=True)
 
-llm_response = qa_chain(query)
+llm_response = qa_chain(user_input)
 process_llm_response(llm_response)
 
 # Managing chat history
