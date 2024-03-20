@@ -58,21 +58,20 @@ def process_llm_response(llm_response):
 
 ### Adding mixtral this time
 
-def query_model(input_text):
-    api_url = "mistralai/Mixtral-8x7B-Instruct-v0.1"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {st.secrets['PAT']}"  # Using PAT from Streamlit's secrets
-    }
-    data_payload = {
-        "input": input_text,
-        "stream": False,
-        "max_new_tokens": 2500 #Maximum 600 token per output
-    }
-    response = requests.post(api_url, headers=headers, json=data_payload)
-    return response.json()
+%env DEEPINFRA_API_TOKEN=6rdEEEr8WLCOp1mMdS3MTgPgT9A9IRSw
 
-qa_chain = RetrievalQA.from_chain_type(llm=response,
+from langchain.llms import DeepInfra
+
+llm = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
+llm.model_kwargs = {
+    "temperature": 0.7,
+    "repetition_penalty": 1.2,
+    "max_new_tokens": 1500,
+    "top_p": 0.9,
+}
+
+
+qa_chain = RetrievalQA.from_chain_type(llm=llm,
                                   chain_type="stuff",
                                   retriever=qdrant.as_retriever(search_kwargs={"k": 2}),
                                   return_source_documents=True)
