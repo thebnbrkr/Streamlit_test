@@ -60,6 +60,8 @@ def process_llm_response(llm_response):
 
 from langchain.llms import DeepInfra
 
+api_token = st.secrets["DEEPINFRA_API_TOKEN"]
+
 llm = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
 llm.model_kwargs = {
     "temperature": 0.7,
