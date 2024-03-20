@@ -62,6 +62,10 @@ def process_llm_response(llm_response):
 
 ["DEEPINFRA_API_TOKEN"] = "6rdEEEr8WLCOp1mMdS3MTgPgT9A9IRSw"
 
+import os
+
+os.environ["DEEPINFRA_API_TOKEN"] = "6rdEEEr8WLCOp1mMdS3MTgPgT9A9IRSw"
+
 from langchain.llms import DeepInfra
 
 llm = DeepInfra(model_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
