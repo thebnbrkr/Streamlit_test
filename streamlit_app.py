@@ -4,19 +4,15 @@ import requests
 
 #### Bunch of shit
 
-from langchain.document_loaders import UnstructuredPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import Chroma
 
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
+from langchain.chains import RetrievalQA
+from langchain.document_loaders import TextLoader
+from langchain.document_loaders import PyPDFLoader
+from langchain.document_loaders import DirectoryLoader
 
-from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
-from langchain.llms import HuggingFaceHub
-from langchain_community.document_loaders import PyPDFDirectoryLoader
 
-from langchain.retrievers import BM25Retriever, EnsembleRetriever
+from langchain.embeddings import HuggingFaceInstructEmbeddings
 
 #####
 
