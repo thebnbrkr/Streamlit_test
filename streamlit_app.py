@@ -2,6 +2,24 @@ import streamlit as st
 from streamlit_chat import message
 import requests
 
+#### Bunch of shit
+
+from langchain.document_loaders import UnstructuredPDFLoader
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.vectorstores import Chroma
+
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.runnables import RunnablePassthrough
+
+from langchain.embeddings import HuggingFaceInferenceAPIEmbeddings
+from langchain.llms import HuggingFaceHub
+from langchain_community.document_loaders import PyPDFDirectoryLoader
+
+from langchain.retrievers import BM25Retriever, EnsembleRetriever
+
+#####
+
 # Streamlit UI with Chat
 st.title('Just Boeing Things')
 
