@@ -47,36 +47,13 @@ qdrant = Qdrant(client, collection_name, model_norm)
 
 
 
-### Formatting
-
-
-import textwrap
-
-def wrap_text_preserve_newlines(text, width=110):
-    # Split the input text into lines based on newline characters
-    lines = text.split('\n')
-
-    # Wrap each line individually
-    wrapped_lines = [textwrap.fill(line, width=width) for line in lines]
-
-    # Join the wrapped lines back together using newline characters
-    wrapped_text = '\n'.join(wrapped_lines)
-
-    return wrapped_text
-
-def process_llm_response(llm_response):
-    print(wrap_text_preserve_newlines(llm_response['result']))
-    print('\n\nSources:')
-    for source in llm_response["source_documents"]:
-        print(source.metadata['source'])
-
-### Adding mixtral this time
+## Trying Mixtral
 
 from langchain.llms import DeepInfra
 
 api_token = st.secrets["DEEPINFRA_API_TOKEN"]
 
-llm = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
+llm = DeepInfra(model_id="mistralai/Mixtral-8x7B-Instruct-v0.1")
 llm.model_kwargs = {
     "temperature": 0.7,
     "repetition_penalty": 1.2,
@@ -84,14 +61,7 @@ llm.model_kwargs = {
     "top_p": 0.9,
 }
 
-
-qa_chain = RetrievalQA.from_chain_type(llm=llm,
-                                  chain_type="stuff",
-                                  retriever=qdrant.as_retriever(search_kwargs={"k": 2}),
-                                  return_source_documents=True)
-
-llm_response = qa_chain(user_input)
-process_llm_response(llm_response)
+review_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=qdrant.as_retriever())
 
 # Managing chat history
 if 'chat_history' not in st.session_state:
@@ -107,6 +77,6 @@ if st.button("Send"):
     if user_input:
         st.session_state.chat_history.append({"message": user_input, "is_user": True})
         response = found_docs[0].page_content
-        st.session_state.chat_history.append({"message": process_llm_response(llm_response), "is_user": False})
+        st.session_state.chat_history.append({"message": review_chain.run(user_input), "is_user": False})
         # Clear the input box after sending the message
         st.experimental_rerun()
