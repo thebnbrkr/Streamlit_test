@@ -3,5 +3,5 @@ streamlit-chat
 requests
 datetime
 langchain
--U sentence-transformers
+sentence-transformers
 qdrant-client
