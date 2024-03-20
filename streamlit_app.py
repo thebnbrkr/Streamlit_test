@@ -61,7 +61,6 @@ llm.model_kwargs = {
     "top_p": 0.9,
 }
 
-review_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=qdrant.as_retriever())
 
 # Managing chat history
 if 'chat_history' not in st.session_state:
@@ -76,7 +75,7 @@ user_input = st.text_input("Enter your text here", key="input")
 if st.button("Send"):
     if user_input:
         st.session_state.chat_history.append({"message": user_input, "is_user": True})
-        response = found_docs[0].page_content
+        review_chain = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=qdrant.as_retriever())
         st.session_state.chat_history.append({"message": review_chain.run(user_input), "is_user": False})
         # Clear the input box after sending the message
         st.experimental_rerun()
