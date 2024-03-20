@@ -58,8 +58,6 @@ def process_llm_response(llm_response):
 
 ### Adding mixtral this time
 
-%env DEEPINFRA_API_TOKEN=6rdEEEr8WLCOp1mMdS3MTgPgT9A9IRSw
-
 from langchain.llms import DeepInfra
 
 llm = DeepInfra(model_id="meta-llama/Llama-2-70b-chat-hf")
