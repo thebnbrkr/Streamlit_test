@@ -3,14 +3,13 @@ from streamlit_chat import message
 import requests
 
 #### Bunch of shit
-
+"""
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import TextLoader
 from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import DirectoryLoader
-
+"""
 
 from langchain.embeddings import HuggingFaceInstructEmbeddings
 
