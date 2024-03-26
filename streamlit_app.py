@@ -3,9 +3,10 @@ from streamlit_chat import message
 import requests
 
 #### Bunch of shit
-"""
+
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.chains import RetrievalQA
+"""
 from langchain.document_loaders import TextLoader
 from langchain.document_loaders import PyPDFLoader
 from langchain.document_loaders import DirectoryLoader
@@ -22,8 +23,6 @@ HF_TOKEN = "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"
 
 from langchain.embeddings import HuggingFaceBgeEmbeddings
 import qdrant_client
-
-from langchain.embeddings import HuggingFaceBgeEmbeddings
 
 model_name = "BAAI/bge-base-en"
 encode_kwargs = {'normalize_embeddings': True} # set True to compute cosine similarity
