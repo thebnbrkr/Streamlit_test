@@ -18,7 +18,7 @@ from langchain.embeddings import HuggingFaceInstructEmbeddings
 #####
 
 # Streamlit UI with Chat
-st.title('Just Boeing Things')
+st.title('מותק ❤️')
 
 HF_TOKEN = "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"
 
